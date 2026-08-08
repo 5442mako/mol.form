@@ -13,7 +13,6 @@
             padding: 20px;
         }
         
-        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -325,8 +324,6 @@
 
             <!-- 【1. 簡易見積エリア】 -->
             <div class="price-estimate">
-                <!-- <h2>【簡易見積】</h2> -->
-                
                 <h3>■描写範囲 ※キャラクター１体の料金です</h3>
                 <label><input type="radio" name="type" value="10000" data-label="顔のみ (10,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/image196.webp"> 顔のみ（10,000円）</label>
                 <label><input type="radio" name="type" value="18000" data-label="バストアップ (18,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/577347099318813231.webp"> バストアップ（18,000円）</label>
@@ -369,8 +366,9 @@
 
                 <div id="optionPreview" class="preview"></div>
 
-                <!-- ★簡易見積に追加したお支払い方法の選択肢 ★ -->
+                <!-- 簡易見積：お支払い方法（Wickチケット追加） -->
                 <h3>■お支払い方法（決済手数料）</h3>
+                <label><input type="radio" name="estimatePayment" value="Wickチケット" data-rate="0"> Wickチケット（手数料 0%）</label>
                 <label><input type="radio" name="estimatePayment" value="アズカリ" data-rate="0.055"> アズカリ（手数料 5.5%）</label>
                 <label><input type="radio" name="estimatePayment" value="つなぐ" data-rate="0.055"> つなぐ（手数料 5.5%）</label>
                 <label><input type="radio" name="estimatePayment" value="SKIMA" data-rate="0.22"> SKIMA（手数料 22%）</label>
@@ -431,10 +429,11 @@
                 <input type="email" id="email" name="email" placeholder="info@example.com" required>
             </div>
 
-            <!-- ■ご依頼フォーム側：お支払い方法（必須） -->
+            <!-- ご依頼フォーム側：お支払い方法（Wickチケット追加） -->
             <div class="form-group">
                 <label class="group-title">■お支払い方法 <span class="badge-required">必須</span></label>
-                <label><input type="radio" name="payment" value="アズカリ" data-rate="0.055" required> アズカリ（手数料 5.5%）</label>
+                <label><input type="radio" name="payment" value="Wickチケット" data-rate="0" required> Wickチケット（手数料 0%）</label>
+                <label><input type="radio" name="payment" value="アズカリ" data-rate="0.055"> アズカリ（手数料 5.5%）</label>
                 <label><input type="radio" name="payment" value="つなぐ" data-rate="0.055"> つなぐ（手数料 5.5%）</label>
                 <label><input type="radio" name="payment" value="SKIMA" data-rate="0.22"> SKIMA（手数料 22%）</label>
                 <div class="form-hint">
@@ -685,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     typeRadios.forEach(r => r.addEventListener('change', () => { calculateTotal(); updateTypePreview(); }));
 
-    // ★双方向同期：簡易見積でお支払い方法を選んだらご依頼フォーム側に自動反映★
+    // 双方向同期：簡易見積でお支払い方法を選んだらご依頼フォーム側に自動反映
     estimatePaymentRadios.forEach(r => {
         r.addEventListener('change', (e) => {
             const val = e.target.value;
@@ -696,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ★双方向同期：ご依頼フォーム側でお支払い方法を選んだら簡易見積側に自動反映★
+    // 双方向同期：ご依頼フォーム側でお支払い方法を選んだら簡易見積側に自動反映
     formPaymentRadios.forEach(r => {
         r.addEventListener('change', (e) => {
             const val = e.target.value;
@@ -745,7 +744,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 修正: 未設定の場合のみアラートを出す判定に変更
         if (!GAS_URL) {
             alert("GASのURLが設定されていません。コード内の GAS_URL を設定してください。");
             return;
