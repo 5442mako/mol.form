@@ -744,7 +744,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!GAS_URL || GAS_URL.includes("https://script.google.com/macros/s/AKfycbxJIywr2MzWjC3FEB4U4WQAnir4RnAC7-jwPHJBvN_TYAuXrvRWCIm3bt_B3FaWqDCj/exec")) {
+        // 修正: 未設定の場合のみアラートを出す判定に変更
+        if (!GAS_URL) {
             alert("GASのURLが設定されていません。コード内の GAS_URL を設定してください。");
             return;
         }
