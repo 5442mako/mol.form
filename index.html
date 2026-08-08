@@ -1,0 +1,868 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イラスト制作 お問い合わせフォーム</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .header-image {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+            display: block;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        .content-wrapper {
+            padding: 20px;
+        }
+
+
+        .disclaimer-container {
+            font-size: 0.8em;
+            color: #777;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            border-bottom: 2px solid #ff69b4;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 15px;
+        }
+
+
+        .fee-info {
+            font-size: 1em;
+            color: #e67e22;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+
+        .estimate-note {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+
+        .form-group label.group-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+
+        .badge-required {
+            background-color: #d9534f;
+            color: white;
+            font-size: 0.75em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+
+        .badge-optional {
+            background-color: #777;
+            color: white;
+            font-size: 0.75em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+
+
+        .form-hint {
+            font-size: 0.82em;
+            color: #555;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        .selected-summary-box {
+            background-color: #fff9fb;
+            border: 1.5px solid #ffb6c1;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+
+        .selected-summary-item {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+
+        .selected-summary-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .selected-summary-label {
+            font-weight: bold;
+            color: #d81b60;
+        }
+
+
+        .preview {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+
+        .preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            border: 1px solid #ddd;
+        }
+
+
+        .preview img:hover {
+            transform: scale(1.05);
+        }
+        
+        .preview-note {
+            font-size: 0.8em;
+            color: #777;
+            margin: 0;
+            width: 100%;
+        }
+
+
+        .optionImageWrapper {
+            text-align: center;
+        }
+
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 10px;
+            padding: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .submit-button:hover {
+            background-color: #e65a9e;
+        }
+
+
+        .submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+
+        .popup-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+
+        .price-estimate {
+            background-color: #ffe3f2;
+            padding: 1px 20px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+
+        .hp-field {
+            display: none !important;
+        }
+
+
+        .success-card {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #27ae60;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+
+        .success-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+
+        .success-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+
+        .reset-btn {
+            background-color: transparent;
+            border: 1px solid #ff69b4;
+            color: #ff69b4;
+            padding: 10px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+
+        .reset-btn:hover {
+            background-color: #ff69b4;
+            color: #ffffff;
+        }
+
+
+        #formStatus {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container" id="formContainer">
+    <img src="https://raw.githubusercontent.com/5442mako/image-host-/main/575758226550424048.webp" alt="ヘッダー画像" class="header-image" loading="lazy" decoding="async">
+    
+    <div class="disclaimer-container">
+        <p>
+            ※本ページに掲載された画像の無断転載・無断使用を禁止。<br>
+            ※不正利用が発覚した場合、損害請求の対象となります。
+        </p>
+    </div>
+
+
+    <div class="content-wrapper">
+        <form id="mainContactForm">
+            <!-- スパム対策 (ハニーポット) -->
+            <div class="hp-field">
+                <input type="text" id="website_hp" name="website_hp" tabindex="-1" autocomplete="off">
+            </div>
+
+
+            <!-- 【1. 簡易見積エリア】 -->
+            <div class="price-estimate">
+                <h2>【簡易見積】</h2>
+                
+                <h3>■描写範囲 ※キャラクター１体の料金です</h3>
+                <label><input type="radio" name="type" value="10000" data-label="顔のみ (10,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/image196.webp"> 顔のみ（10,000円）</label>
+                <label><input type="radio" name="type" value="18000" data-label="バストアップ (18,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/577347099318813231.webp"> バストアップ（18,000円）</label>
+                <label><input type="radio" name="type" value="25000" data-label="膝上 (25,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/577346994159223237.webp"> 膝上（25,000円）</label>
+                <label><input type="radio" name="type" value="35000" data-label="全身 (35,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/イラスト210.webp"> 全身（35,000円）</label>
+                <label><input type="radio" name="type" value="8000" data-label="ちびキャラ (8,000円)"> ちびキャラ（8,000円）</label>
+
+
+                <div style="margin-top: 15px; padding: 12px; background-color: #fff; border: 2px solid #ff69b4; border-radius: 8px;">
+                    <label style="font-weight: bold; color: #d9534f; margin-bottom: 5px;">
+                        <input type="radio" name="type" value="90000" data-label="【フルパッケージ】ドレス豪華一枚絵 (90,000円)"> 
+                        【フルパッケージ】ドレス豪華一枚絵（商用利用込み）：90,000円
+                    </label>
+                    <p style="font-size: 0.85em; color: #555; margin: 5px 0 0 24px; line-height: 1.4;">
+                        【内訳】膝上／豪華衣装・ベール・花冠・小物・描き込み背景・顔差分・商用利用・透過がすべて含まれたフルパッケージです。<br>
+                        ※納期目安：2ヶ月〜3ヶ月ほど
+                    </p>
+                </div>
+
+
+                <p style="font-size: 0.8em; color: #666; margin-top: 8px;">※立ち絵やお姿に描き込み量が多い装飾が複数ある場合は増額する場合があります</p>
+                <div id="typeImageBelowOptions" class="preview"></div>
+
+
+                <h3>【追加オプション（複数選択可）】</h3>
+                <label><input type="checkbox" class="option additional-option-item" id="commercialOption" name="additionalOption" value="0" data-label="商用利用 合計金額の50%"> 商用利用 合計金額の50%</label>
+                <p style="font-size: 0.8em; color: #666; margin: -5px 0 10px 24px;">※歌ってみたのみに使用するイラストは商用利用をいただきません</p>
+
+
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="0" data-label="背景透過 (応相談)"> 背景透過（応相談 ※透過する枚数によって変動がございます）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="1000" data-label="口差分 (1つ 1,000円)"> 口差分（1つ 1,000円）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="5000" data-label="目の差分 (1つ 5,000円)"> 目の差分（ウインク、開閉）（1つ 5,000円）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="20000" data-label="ポーズ差分 (20,000円〜)"> ポーズ差分（応相談 20,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="25000" data-label="華美ドレス (25,000円〜)"> 華美ドレス（25,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="25000" data-label="高密度背景 (25,000円〜)"> 高密度背景（花、宝石敷き詰め）（25,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="50000" data-label="風景、街並みなどの背景 (〜50,000円)"> 風景、街並みなどの背景（〜50,000円）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="8000" data-label="簡易背景 (8,000円〜)"> 簡易背景（フレームやエフェクト）（8,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="5000" data-label="小物(描き込み少) (5,000円〜)"> 小物（描き込み少）（5,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="10000" data-label="小物(描き込み多) (10,000円〜15,000円)"> 小物（描き込み多）（10,000円〜15,000円）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="20000" data-label="衣装デザイン (20,000円〜)"> 衣装デザイン（応相談 20,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="50000" data-label="パーツ分け、動くイラスト (50,000円〜)"> パーツ分け、動くイラスト（50,000円〜）</label>
+                <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="0" data-label="単色、パターン背景 (無料)"> 単色、パターン背景（無料）</label>
+                <label style="margin-top: 15px;"><input type="checkbox" class="option" id="noOptionCheckbox" name="additionalOption" value="0" data-label="追加オプションなし"> 追加オプションなし</label>
+
+
+                <div id="optionPreview" class="preview"></div>
+
+
+                <h3>【合計】</h3>
+                <div class="total">制作基本料金（小計）：¥<span id="total">0</span></div>
+                <div class="total" style="color: #d81b60; font-size: 1.3em;">お支払概算合計：¥<span id="finalTotal">0</span></div>
+                
+                <div class="estimate-note">
+                    ※この金額はあくまで目安です。<br>
+                    ※正式にご依頼をご希望の方は、下記のご依頼フォームにご入力・送信をお願いいたします。
+                </div>
+            </div>
+
+
+            <!-- 【2. ご依頼フォームエリア】 -->
+            <h3>【ご依頼フォーム】</h3>
+            
+            <div style="font-size: 0.9em; background-color: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+                <strong>【お問い合わせ後の流れについて】</strong><br>
+                1. 担当者からのご連絡：送信後、内容を確認し3日以内に折り返しご連絡いたします。<br>
+                2. 連絡がない場合：4日以降も連絡がない場合は、X (Twitter)のDMにご連絡ください。
+            </div>
+
+
+            <!-- 見積連動表示枠 -->
+            <div class="selected-summary-box">
+                <div class="selected-summary-item">
+                    <span class="selected-summary-label">■選択中の描写範囲：</span>
+                    <span id="displaySelectedType">未選択</span>
+                </div>
+                <div class="selected-summary-item">
+                    <span class="selected-summary-label">■選択中の追加オプション：</span>
+                    <span id="displaySelectedOptions">なし</span>
+                </div>
+                <div class="selected-summary-item">
+                    <span class="selected-summary-label">■選択中のお支払い方法：</span>
+                    <span id="displaySelectedPayment">未選択</span>
+                </div>
+                <div class="selected-summary-item">
+                    <span class="selected-summary-label">■決済手数料：</span>
+                    <span id="displayFeeAmount">¥0</span>
+                </div>
+                <div class="selected-summary-item">
+                    <span class="selected-summary-label">■お支払概算合計：</span>
+                    <strong style="color: #d81b60; font-size: 1.15em;" id="displaySelectedTotal">¥0</strong>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="name" class="group-title">活動名またはハンドルネーム <span class="badge-required">必須</span></label>
+                <div class="form-hint">例: ローズ・アントワネット (@X_name) ※活動名とSNSアカウントを併記していただくとスムーズです。</div>
+                <input type="text" id="name" name="name" placeholder="ローズ・アントワネット (@X_name)" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email" class="group-title">メールアドレス <span class="badge-required">必須</span></label>
+                <div class="form-hint">※ご依頼内容の確認や料金に関するご連絡に利用いたします。</div>
+                <input type="email" id="email" name="email" placeholder="info@example.com" required>
+            </div>
+
+
+            <!-- ■追加項目1: お支払い方法（必須） -->
+            <div class="form-group">
+                <label class="group-title">■お支払い方法 <span class="badge-required">必須</span></label>
+                <label><input type="radio" name="payment" value="アズカリ" data-rate="0.055" required> アズカリ（手数料 5.5%）</label>
+                <label><input type="radio" name="payment" value="つなぐ" data-rate="0.055"> つなぐ（手数料 5.5%）</label>
+                <label><input type="radio" name="payment" value="SKIMA" data-rate="0.22"> SKIMA（手数料 22%）</label>
+                <div class="form-hint">
+                    ご入金はラフ確定時となります。<br>
+                    手数料にご負担いただきますのでご了承ください。<br>
+                    ご入金確認後、清書制作に取り掛かります。
+                </div>
+            </div>
+
+
+            <!-- ■追加項目2: 実績公開について（必須） -->
+            <div class="form-group">
+                <label class="group-title">■実績公開について <span class="badge-required">必須</span></label>
+                <div class="form-hint">
+                    完成したイラストは、当方のポートフォリオサイト（Xfolio、および無断転載・AI学習対策のあるSNSサイト「Wick」）にて実績として公開させていただきます。X（旧Twitter）への掲載についてご希望をお選びください。
+                </div>
+                <label><input type="radio" name="portfolio" value="Xfolio、Wick のみで公開（Xへの掲載は不要）" required> Xfolio、Wick のみで公開（Xへの掲載は不要）</label>
+                <label><input type="radio" name="portfolio" value="Xfolio、Wick に加え、Xでの公開も希望する"> Xfolio、Wick に加え、Xでの公開も希望する</label>
+                <div class="form-hint" style="margin-top: 5px;">
+                    ※完全非公開（すべてのサイトでの掲載NG）をご希望の場合は、事前にDMにてご相談ください。
+                </div>
+            </div>
+
+
+            <!-- ■追加項目3: メッセージの雰囲気について（任意） -->
+            <div class="form-group">
+                <label class="group-title">■メッセージの雰囲気について <span class="badge-optional">任意</span></label>
+                <div class="form-hint">
+                    クライアント様がリラックスしてお取引できるよう、メッセージのトーンをお選びいただけます。ご希望がございましたらチェックを入れてください。
+                </div>
+                <label><input type="radio" name="tone" value="標準（ビジネス向け）"> 標準（ビジネス向け）：丁寧でフォーマルな文章でやり取りします。</label>
+                <label><input type="radio" name="tone" value="マイルド（個人向け）"> マイルド（個人向け）：敬語をベースにしつつ、絵文字などを交えた柔らかい雰囲気でやり取りします。</label>
+                <div class="form-hint" style="margin-top: 5px;">
+                    ※チェックがない場合は、標準（ビジネス向け）の文章にてご対応いたします。
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="reason" class="group-title">ご依頼の検討の決め手となったイラストがあれば教えてください <span class="badge-optional">任意</span></label>
+                <input type="text" id="reason" name="reason" placeholder="〇〇のイラストを見て、など">
+            </div>
+
+
+            <div class="form-group">
+                <label for="template" class="group-title">ご依頼テンプレート <span class="badge-required">必須</span></label>
+                <div class="form-hint">各項目の「：」の後にご希望内容をご記入ください。</div>
+                <textarea id="template" name="template" rows="14" required>【納期】：
+【納期の前倒しの可否】：
+【使用用途】：
+【イラストサイズ】：
+【納品形式】：
+【キャラの年齢】：
+【ご希望の頭身】：
+【ご希望の構図】：
+【ご希望のポーズ】：
+【雰囲気】：
+【表情】：
+【実績公開可能日時】：
+【その他、ご相談したいこと】：</textarea>
+            </div>
+
+
+            <p style="text-align: center; font-size: 0.9em; font-weight: bold; color: #ff69b4; margin-top: 20px;">
+                ▼入力が終わりましたら「送信する」をクリック（タップ）してください。▼
+            </p>
+
+
+            <button type="submit" id="submitBtn" class="submit-button">送信する</button>
+            <div id="formStatus">※必須項目に入力しないと送信できません。</div>
+        </form>
+
+
+        <!-- 送信完了画面 -->
+        <div id="successCard" class="success-card">
+            <div class="success-icon">✓</div>
+            <div class="success-title">送信が完了しました</div>
+            <p class="success-text">
+                お問い合わせありがとうございます。<br>
+                内容を確認のうえ、担当者よりご連絡いたします。
+            </p>
+            <button type="button" class="reset-btn" id="resetBtn">もう一度送信する</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup-overlay" id="popupOverlay">
+    <img id="popupImage" src="" alt="拡大画像" loading="lazy" decoding="async">
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ★発行したGASのウェブアプリURLをここに貼り付けてください
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxJIywr2MzWjC3FEB4U4WQAnir4RnAC7-jwPHJBvN_TYAuXrvRWCIm3bt_B3FaWqDCj/exec";
+
+
+    const totalEl = document.getElementById("total");
+    const feeAmountEl = document.getElementById("feeAmount");
+    const feeRateLabelEl = document.getElementById("feeRateLabel");
+    const finalTotalEl = document.getElementById("finalTotal");
+
+
+    const displaySelectedType = document.getElementById("displaySelectedType");
+    const displaySelectedOptions = document.getElementById("displaySelectedOptions");
+    const displaySelectedPayment = document.getElementById("displaySelectedPayment");
+    const displayFeeAmount = document.getElementById("displayFeeAmount");
+    const displaySelectedTotal = document.getElementById("displaySelectedTotal");
+
+
+    const typePreviewContainer = document.getElementById('typeImageBelowOptions');
+    const optionPreviewContainer = document.getElementById("optionPreview");
+    const typeRadios = document.querySelectorAll('input[name="type"]');
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    const allOptionCheckboxes = document.querySelectorAll('.option');
+    const noOptionCheckbox = document.getElementById('noOptionCheckbox');
+    const actualOptionItems = document.querySelectorAll('.additional-option-item');
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupImage = document.getElementById("popupImage");
+
+
+    const mainForm = document.getElementById('mainContactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+    const successCard = document.getElementById('successCard');
+    const resetBtn = document.getElementById('resetBtn');
+
+
+    let lastSubmitTime = 0;
+
+
+    const showPopup = (src) => { popupImage.src = src; popupOverlay.style.display = "flex"; };
+    const hidePopup = () => { popupOverlay.style.display = "none"; };
+
+
+    // --- 計算・表示連動処理 ---
+    const calculateTotal = () => {
+        let subtotal = 0;
+        let isCommercial = false;
+
+
+        // 1. 描写範囲
+        const selectedType = document.querySelector('input[name="type"]:checked');
+        let typeText = "未選択";
+        if (selectedType) {
+            subtotal += parseInt(selectedType.value, 10);
+            typeText = selectedType.getAttribute('data-label');
+        }
+        displaySelectedType.textContent = typeText;
+
+
+        // 2. 追加オプション
+        const selectedOptionsText = [];
+        if (noOptionCheckbox?.checked) {
+            selectedOptionsText.push("追加オプションなし");
+        } else {
+            actualOptionItems.forEach(opt => {
+                if (opt.checked) {
+                    selectedOptionsText.push(opt.getAttribute('data-label'));
+                    if (opt.id === 'commercialOption') {
+                        isCommercial = true;
+                    } else {
+                        subtotal += parseInt(opt.value, 10);
+                    }
+                }
+            });
+        }
+        displaySelectedOptions.textContent = selectedOptionsText.length > 0 ? selectedOptionsText.join(', ') : 'なし';
+
+
+        if (isCommercial) {
+            subtotal = Math.round(subtotal * 1.5);
+        }
+
+
+        // 3. お支払い方法・手数料計算
+        const selectedPayment = document.querySelector('input[name="payment"]:checked');
+        let fee = 0;
+        let paymentText = "未選択";
+        let feeRateText = "";
+
+
+        if (selectedPayment) {
+            paymentText = selectedPayment.value;
+            const rate = parseFloat(selectedPayment.getAttribute('data-rate'));
+            fee = Math.round(subtotal * rate);
+            feeRateText = `(${paymentText}: ${(rate * 100).toFixed(1)}%)`;
+        }
+
+
+        const finalTotal = subtotal + fee;
+
+
+        // 画面表示更新
+        totalEl.textContent = subtotal.toLocaleString();
+        feeAmountEl.textContent = fee.toLocaleString();
+        feeRateLabelEl.textContent = feeRateText;
+        finalTotalEl.textContent = finalTotal.toLocaleString();
+
+
+        displaySelectedPayment.textContent = paymentText;
+        displayFeeAmount.textContent = "¥" + fee.toLocaleString() + (feeRateText ? " " + feeRateText : "");
+        displaySelectedTotal.textContent = "¥" + finalTotal.toLocaleString();
+    };
+
+
+    const createPreviewImage = (url, altText, container, isOption = false) => {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = altText;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.onclick = (e) => { e.preventDefault(); showPopup(img.src); };
+        
+        if (isOption) {
+            img.style.maxWidth = "150px";
+            img.style.maxHeight = "150px";
+        } else {
+            img.style.maxWidth = '50%';
+            img.style.maxHeight = '200px';
+            img.style.boxSizing = 'border-box';
+            img.style.padding = '0 5px';
+            img.style.display = 'inline-block';
+        }
+        container.appendChild(img);
+    };
+
+
+    const updateTypePreview = () => {
+        typePreviewContainer.innerHTML = '';
+        const selected = document.querySelector('input[name="type"]:checked');
+        if (selected?.dataset.imgs) {
+            const imageUrls = selected.dataset.imgs.split(',').map(url => url.trim()).filter(Boolean);
+            imageUrls.forEach(url => createPreviewImage(url, "タイプ画像", typePreviewContainer));
+            if (imageUrls.length > 0) {
+                const note = document.createElement("p");
+                note.textContent = "※画像をクリックすると拡大します。";
+                note.className = "preview-note";
+                typePreviewContainer.appendChild(note);
+            }
+        }
+    };
+
+
+    const updateOptionPreview = () => {
+        optionPreviewContainer.innerHTML = '';
+        actualOptionItems.forEach(opt => {
+            if (opt.checked && opt.dataset.imgs) {
+                const imageUrls = opt.dataset.imgs.split(',').map(url => url.trim()).filter(Boolean);
+                if (imageUrls.length > 0) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "optionImageWrapper";
+                    imageUrls.forEach(url => createPreviewImage(url, "オプション画像", wrapper, true));
+                    optionPreviewContainer.appendChild(wrapper);
+                }
+            }
+        });
+
+
+        if (Array.from(actualOptionItems).filter(opt => opt.checked && opt.dataset.imgs).length > 0) {
+            const note = document.createElement("p");
+            note.textContent = "※画像をクリックすると拡大します。";
+            note.className = "preview-note";
+            optionPreviewContainer.appendChild(note);
+        }
+    };
+
+
+    popupOverlay.addEventListener('click', hidePopup);
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === "IMG") e.preventDefault(); });
+    document.addEventListener('dragstart', e => { if (e.target.tagName === "IMG") e.preventDefault(); });
+    
+    typeRadios.forEach(r => r.addEventListener('change', () => { calculateTotal(); updateTypePreview(); }));
+    paymentRadios.forEach(r => r.addEventListener('change', calculateTotal));
+    
+    allOptionCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox === noOptionCheckbox && checkbox.checked) {
+                actualOptionItems.forEach(opt => { opt.checked = false; });
+            } else if (checkbox.checked) {
+                if (noOptionCheckbox) noOptionCheckbox.checked = false;
+            }
+            calculateTotal();
+            updateOptionPreview();
+        });
+    });
+
+
+    calculateTotal();
+    updateTypePreview();
+    updateOptionPreview();
+
+
+    // --- GAS送信処理 ---
+    mainForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+
+        const honeypot = document.getElementById('website_hp').value;
+        if (honeypot) return;
+
+
+        const emailValue = document.getElementById('email').value;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(emailValue)) {
+            formStatus.style.color = "#e74c3c";
+            formStatus.innerText = "正しいメールアドレスの形式で入力してください。";
+            return;
+        }
+
+
+        const now = Date.now();
+        if (now - lastSubmitTime < 5000) {
+            formStatus.style.color = "#e67e22";
+            formStatus.innerText = "連続送信はできません。少し時間を置いてお試しください。";
+            return;
+        }
+
+
+        if (!GAS_URL || GAS_URL.includes("https://script.google.com/macros/s/AKfycbxJIywr2MzWjC3FEB4U4WQAnir4RnAC7-jwPHJBvN_TYAuXrvRWCIm3bt_B3FaWqDCj/exec")) {
+            alert("GASのURLが設定されていません。コード内の GAS_URL を設定してください。");
+            return;
+        }
+
+
+        // 選択値の取得
+        const selectedPortfolio = document.querySelector('input[name="portfolio"]:checked')?.value || "";
+        const selectedTone = document.querySelector('input[name="tone"]:checked')?.value || "標準（ビジネス向け）";
+
+
+        const payload = {
+            name: document.getElementById('name').value,
+            email: emailValue,
+            type: displaySelectedType.textContent,
+            options: displaySelectedOptions.textContent,
+            subtotal: "¥" + totalEl.textContent,
+            payment: displaySelectedPayment.textContent,
+            fee: displayFeeAmount.textContent,
+            finalTotal: displaySelectedTotal.textContent,
+            portfolio: selectedPortfolio,
+            tone: selectedTone,
+            reason: document.getElementById('reason').value,
+            template: document.getElementById('template').value
+        };
+
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = "送信中...";
+        formStatus.innerText = "";
+
+
+        fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).catch(error => {
+            console.error("送信エラー:", error);
+        });
+
+
+        setTimeout(function() {
+            lastSubmitTime = Date.now();
+            mainForm.style.display = 'none';
+            successCard.style.display = 'block';
+
+
+            mainForm.reset();
+            calculateTotal();
+            updateTypePreview();
+            updateOptionPreview();
+            submitBtn.innerText = "送信する";
+            submitBtn.disabled = false;
+        }, 3000);
+    });
+
+
+    resetBtn.addEventListener('click', function() {
+        successCard.style.display = 'none';
+        mainForm.style.display = 'block';
+        formStatus.style.color = "#e74c3c";
+        formStatus.innerText = "※必須項目に入力しないと送信できません。";
+    });
+});
+</script>
+
+
+</body>
+</html>
