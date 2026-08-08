@@ -5,159 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>イラスト制作 お問い合わせフォーム</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
+        :root {
+            --primary-color: #ff6b9d;
+            --primary-hover: #e05284;
+            --primary-light: #fff0f5;
+            --accent-color: #d81b60;
+            --text-main: #2b2d42;
+            --text-sub: #6c757d;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #edf2f7;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 16px;
+            line-height: 1.6;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
-            background: #fff;
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .header-image {
             width: 100%;
             height: auto;
-            max-height: 250px;
+            max-height: 280px;
             object-fit: cover;
             display: block;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
         }
-        
+
         .content-wrapper {
-            padding: 20px;
+            padding: 32px 28px;
         }
 
         .disclaimer-container {
-            font-size: 0.8em;
-            color: #777;
             text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 28px;
+            padding: 16px;
+            background-color: #fff8fa;
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--primary-color);
         }
-        
+
+        .disclaimer-container h1 {
+            font-size: 1.4em;
+            margin: 0 0 8px 0;
+            color: var(--accent-color);
+            letter-spacing: 0.05em;
+        }
+
+        .disclaimer-container p {
+            font-size: 0.82em;
+            color: var(--text-sub);
+            margin: 0;
+            line-height: 1.6;
+        }
+
         h3 {
-            border-bottom: 2px solid #ff69b4;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        
-        .total {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-top: 15px;
-        }
-
-        .fee-info {
-            font-size: 1em;
-            color: #e67e22;
-            font-weight: bold;
-            margin-top: 5px;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            padding-left: 12px;
         }
 
-        .estimate-note {
-            font-size: 0.85em;
-            color: #555;
-            margin-top: 10px;
-            line-height: 1.5;
+        h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
         }
 
         label {
-            display: block;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            background: #fdfdfd;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
             cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95em;
+        }
+
+        label:hover {
+            background-color: var(--primary-light);
+            border-color: #ffb6c1;
+            transform: translateY(-1px);
         }
 
         input[type="radio"],
         input[type="checkbox"] {
-            margin-right: 8px;
+            accent-color: var(--primary-color);
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         .form-group label.group-title {
-            font-weight: bold;
-            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-bottom: 6px;
+            cursor: default;
             font-size: 1em;
+            color: var(--text-main);
+        }
+
+        .form-group label.group-title:hover {
+            background: none;
+            transform: none;
         }
 
         .badge-required {
-            background-color: #d9534f;
+            background-color: #e63946;
             color: white;
-            font-size: 0.75em;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
         }
 
         .badge-optional {
-            background-color: #777;
+            background-color: var(--text-sub);
             color: white;
-            font-size: 0.75em;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
         }
 
         .form-hint {
-            font-size: 0.82em;
-            color: #555;
-            margin-top: 4px;
-            margin-bottom: 10px;
-            line-height: 1.4;
+            font-size: 0.83em;
+            color: var(--text-sub);
+            margin-top: 2px;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
 
         input[type="text"],
         input[type="email"],
         textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.5;
+            background-color: #fafafa;
+            color: var(--text-main);
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.15);
+        }
+
+        .price-estimate {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffffff 100%);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid #ffe3ec;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .price-estimate h3:first-child {
+            margin-top: 0;
         }
 
         .selected-summary-box {
-            background-color: #fff9fb;
-            border: 1.5px solid #ffb6c1;
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 25px;
-            font-size: 0.95em;
+            background-color: #ffffff;
+            border: 1px solid #fecdd3;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
         }
 
         .selected-summary-item {
-            margin-bottom: 8px;
-            line-height: 1.5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #f1f5f9;
+            font-size: 0.92em;
         }
 
         .selected-summary-item:last-child {
-            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 4px;
         }
 
         .selected-summary-label {
-            font-weight: bold;
-            color: #d81b60;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .total {
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 16px;
+        }
+
+        .fee-info {
+            font-size: 0.9em;
+            color: #e67e22;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .estimate-note {
+            font-size: 0.82em;
+            color: var(--text-sub);
+            margin-top: 16px;
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px 14px;
+            border-radius: 8px;
         }
 
         .preview {
-            margin-top: 15px;
+            margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             justify-content: flex-start;
             align-items: center;
         }
@@ -165,20 +280,22 @@
         .preview img {
             max-width: 100%;
             height: auto;
-            border-radius: 6px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: transform 0.2s ease-in-out;
-            border: 1px solid #ddd;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .preview img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
+            box-shadow: var(--shadow-md);
         }
-        
+
         .preview-note {
-            font-size: 0.8em;
-            color: #777;
-            margin: 0;
+            font-size: 0.78em;
+            color: var(--text-sub);
+            margin: 4px 0 0 0;
             width: 100%;
         }
 
@@ -189,27 +306,33 @@
         .submit-button {
             display: block;
             width: 100%;
-            max-width: 300px;
-            margin: 30px auto 10px;
-            padding: 14px;
-            font-size: 1.1em;
-            font-weight: bold;
+            max-width: 320px;
+            margin: 32px auto 12px;
+            padding: 16px;
+            font-size: 1.05em;
+            font-weight: 700;
             color: #fff;
-            background-color: #ff69b4;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             text-align: center;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 14px rgba(216, 27, 96, 0.3);
+            transition: var(--transition);
+            letter-spacing: 0.03em;
         }
 
         .submit-button:hover {
-            background-color: #e65a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(216, 27, 96, 0.4);
+            background: linear-gradient(135deg, #ff528c, #c2185b);
         }
 
         .submit-button:disabled {
-            background-color: #ccc;
+            background: #cbd5e1;
+            box-shadow: none;
             cursor: not-allowed;
+            transform: none;
         }
 
         .popup-overlay {
@@ -218,26 +341,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             cursor: pointer;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .popup-overlay img {
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-        }
-
-        .price-estimate {
-            background-color: #ffe3f2;
-            padding: 1px 20px 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
         .hp-field {
@@ -247,59 +371,78 @@
         .success-card {
             display: none;
             text-align: center;
-            padding: 40px 20px;
+            padding: 48px 20px;
         }
 
         .success-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #27ae60;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2ed573, #10ac84);
             color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            margin: 0 auto 20px;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 16px rgba(46, 213, 115, 0.3);
         }
 
         .success-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 12px;
         }
 
         .success-text {
-            font-size: 14px;
-            color: #666666;
+            font-size: 15px;
+            color: var(--text-sub);
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .reset-btn {
             background-color: transparent;
-            border: 1px solid #ff69b4;
-            color: #ff69b4;
-            padding: 10px 24px;
-            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 28px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.2s;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         .reset-btn:hover {
-            background-color: #ff69b4;
+            background-color: var(--primary-color);
             color: #ffffff;
         }
 
         #formStatus {
-            font-size: 17px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
             text-align: center;
             color: #e74c3c;
-            margin-top: 10px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px 8px;
+            }
+            .content-wrapper {
+                padding: 20px 16px;
+            }
+            .price-estimate {
+                padding: 16px;
+            }
+            .selected-summary-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
         }
     </style>
 </head>
@@ -308,15 +451,15 @@
 <div class="container" id="formContainer">
     <img src="https://raw.githubusercontent.com/5442mako/image-host-/main/575758226550424048.webp" alt="ヘッダー画像" class="header-image" loading="lazy" decoding="async">
     
-    <div class="disclaimer-container">
-        <p>
-             <h1>【ご依頼フォーム】</h1><br>
-            ※本ページに掲載された画像の無断転載・無断使用を禁止。<br>
-            ※不正利用が発覚した場合、損害請求の対象となります。
-        </p>
-    </div>
-
     <div class="content-wrapper">
+        <div class="disclaimer-container">
+            <h1>ご依頼フォーム</h1>
+            <p>
+                ※本ページに掲載された画像の無断転載・無断使用を禁止します。<br>
+                ※不正利用が発覚した場合、損害請求の対象となります。
+            </p>
+        </div>
+
         <form id="mainContactForm">
             <!-- スパム対策 (ハニーポット) -->
             <div class="hp-field">
@@ -332,23 +475,23 @@
                 <label><input type="radio" name="type" value="35000" data-label="全身 (35,000円)" data-imgs="https://raw.githubusercontent.com/5442mako/image-host-/main/イラスト210.webp"> 全身（35,000円）</label>
                 <label><input type="radio" name="type" value="8000" data-label="ちびキャラ (8,000円)"> ちびキャラ（8,000円）</label>
 
-                <div style="margin-top: 15px; padding: 12px; background-color: #fff; border: 2px solid #ff69b4; border-radius: 8px;">
-                    <label style="font-weight: bold; color: #d9534f; margin-bottom: 5px;">
+                <div style="margin-top: 15px; padding: 16px; background-color: #fff; border: 1.5px solid var(--primary-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                    <label style="font-weight: bold; color: var(--accent-color); margin-bottom: 5px; border: none; padding: 0; background: none;">
                         <input type="radio" name="type" value="90000" data-label="【フルパッケージ】ドレス豪華一枚絵 (90,000円)"> 
                         【フルパッケージ】ドレス豪華一枚絵（商用利用込み）：90,000円
                     </label>
-                    <p style="font-size: 0.85em; color: #555; margin: 5px 0 0 24px; line-height: 1.4;">
+                    <p style="font-size: 0.85em; color: var(--text-sub); margin: 8px 0 0 28px; line-height: 1.5;">
                         【内訳】膝上／豪華衣装・ベール・花冠・小物・描き込み背景・顔差分・商用利用・透過がすべて含まれたフルパッケージです。<br>
                         ※納期目安：2ヶ月〜3ヶ月ほど
                     </p>
                 </div>
 
-                <p style="font-size: 0.8em; color: #666; margin-top: 8px;">※立ち絵やお姿に描き込み量が多い装飾が複数ある場合は増額する場合があります</p>
+                <p style="font-size: 0.8em; color: var(--text-sub); margin-top: 12px;">※立ち絵やお姿に描き込み量が多い装飾が複数ある場合は増額する場合があります</p>
                 <div id="typeImageBelowOptions" class="preview"></div>
 
                 <h3>【追加オプション（複数選択可）】</h3>
                 <label><input type="checkbox" class="option additional-option-item" id="commercialOption" name="additionalOption" value="0" data-label="商用利用 合計金額の50%"> 商用利用 合計金額の50%</label>
-                <p style="font-size: 0.8em; color: #666; margin: -5px 0 10px 24px;">※歌ってみたのみに使用するイラストは商用利用をいただきません</p>
+                <p style="font-size: 0.8em; color: var(--text-sub); margin: -4px 0 12px 28px;">※歌ってみたのみに使用するイラストは商用利用をいただきません</p>
 
                 <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="0" data-label="背景透過 (応相談)"> 背景透過（応相談 ※透過する枚数によって変動がございます）</label>
                 <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="1000" data-label="口差分 (1つ 1,000円)"> 口差分（1つ 1,000円）</label>
@@ -363,11 +506,11 @@
                 <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="20000" data-label="衣装デザイン (20,000円〜)"> 衣装デザイン（応相談 20,000円〜）</label>
                 <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="50000" data-label="パーツ分け、動くイラスト (50,000円〜)"> パーツ分け、動くイラスト（50,000円〜）</label>
                 <label><input type="checkbox" class="option additional-option-item" name="additionalOption" value="0" data-label="単色、パターン背景 (無料)"> 単色、パターン背景（無料）</label>
-                <label style="margin-top: 15px;"><input type="checkbox" class="option" id="noOptionCheckbox" name="additionalOption" value="0" data-label="追加オプションなし"> 追加オプションなし</label>
+                <label style="margin-top: 12px;"><input type="checkbox" class="option" id="noOptionCheckbox" name="additionalOption" value="0" data-label="追加オプションなし"> 追加オプションなし</label>
 
                 <div id="optionPreview" class="preview"></div>
 
-                <!-- 簡易見積：お支払い方法（Wickチケット追加） -->
+                <!-- 簡易見積：お支払い方法 -->
                 <h3>■お支払い方法（決済手数料）</h3>
                 <label><input type="radio" name="estimatePayment" value="Wickチケット" data-rate="0"> Wickチケット（手数料 0%）</label>
                 <label><input type="radio" name="estimatePayment" value="アズカリ" data-rate="0.055"> アズカリ（手数料 5.5%）</label>
@@ -376,8 +519,8 @@
 
                 <h3>【合計】</h3>
                 <div class="total">制作基本料金（小計）：¥<span id="total">0</span></div>
-                <div class="fee-info">決済手数料：¥<span id="feeAmount">0</span> <span id="feeRateLabel" style="font-size:0.85em; font-weight:normal; color:#666;"></span></div>
-                <div class="total" style="color: #d81b60; font-size: 1.3em;">お支払概算合計：¥<span id="finalTotal">0</span></div>
+                <div class="fee-info">決済手数料：¥<span id="feeAmount">0</span> <span id="feeRateLabel" style="font-size:0.85em; font-weight:normal; color:var(--text-sub);"></span></div>
+                <div class="total" style="color: var(--accent-color); font-size: 1.35em; margin-top: 8px;">お支払概算合計：¥<span id="finalTotal">0</span></div>
                 
                 <div class="estimate-note">
                     ※この金額はあくまで目安です。<br>
@@ -388,7 +531,7 @@
             <!-- 【2. ご依頼フォームエリア】 -->
             <h3>【ご依頼フォーム】</h3>
             
-            <div style="font-size: 0.9em; background-color: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+            <div style="font-size: 0.88em; background-color: var(--bg-color); padding: 16px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--border-color);">
                 <strong>【お問い合わせ後の流れについて】</strong><br>
                 1. 担当者からのご連絡：送信後、内容を確認し3日以内に折り返しご連絡いたします。<br>
                 2. 連絡がない場合：4日以降も連絡がない場合は、X (Twitter)のDMにご連絡ください。
@@ -414,7 +557,7 @@
                 </div>
                 <div class="selected-summary-item">
                     <span class="selected-summary-label">■お支払概算合計：</span>
-                    <strong style="color: #d81b60; font-size: 1.15em;" id="displaySelectedTotal">¥0</strong>
+                    <strong style="color: var(--accent-color); font-size: 1.2em;" id="displaySelectedTotal">¥0</strong>
                 </div>
             </div>
 
@@ -430,14 +573,14 @@
                 <input type="email" id="email" name="email" placeholder="info@example.com" required>
             </div>
 
-            <!-- ご依頼フォーム側：お支払い方法（Wickチケット追加） -->
+            <!-- ご依頼フォーム側：お支払い方法 -->
             <div class="form-group">
                 <label class="group-title">■お支払い方法 <span class="badge-required">必須</span></label>
                 <label><input type="radio" name="payment" value="Wickチケット" data-rate="0" required> Wickチケット（手数料 0%）</label>
                 <label><input type="radio" name="payment" value="アズカリ" data-rate="0.055"> アズカリ（手数料 5.5%）</label>
                 <label><input type="radio" name="payment" value="つなぐ" data-rate="0.055"> つなぐ（手数料 5.5%）</label>
                 <label><input type="radio" name="payment" value="SKIMA" data-rate="0.22"> SKIMA（手数料 22%）</label>
-                <div class="form-hint">
+                <div class="form-hint" style="margin-top: 8px;">
                     ご入金はラフ確定時となります。<br>
                     手数料にご負担いただきますのでご了承ください。<br>
                     ご入金確認後、清書制作に取り掛かります。
@@ -452,7 +595,7 @@
                 </div>
                 <label><input type="radio" name="portfolio" value="Xfolio、Wick のみで公開（Xへの掲載は不要）" required> Xfolio、Wick のみで公開（Xへの掲載は不要）</label>
                 <label><input type="radio" name="portfolio" value="Xfolio、Wick に加え、Xでの公開も希望する"> Xfolio、Wick に加え、Xでの公開も希望する</label>
-                <div class="form-hint" style="margin-top: 5px;">
+                <div class="form-hint" style="margin-top: 8px;">
                     ※完全非公開（すべてのサイトでの掲載NG）をご希望の場合は、事前にDMにてご相談ください。
                 </div>
             </div>
@@ -465,7 +608,7 @@
                 </div>
                 <label><input type="radio" name="tone" value="標準（ビジネス向け）"> 標準（ビジネス向け）：丁寧でフォーマルな文章でやり取りします。</label>
                 <label><input type="radio" name="tone" value="マイルド（個人向け）"> マイルド（個人向け）：敬語をベースにしつつ、絵文字などを交えた柔らかい雰囲気でやり取りします。</label>
-                <div class="form-hint" style="margin-top: 5px;">
+                <div class="form-hint" style="margin-top: 8px;">
                     ※チェックがない場合は、標準（ビジネス向け）の文章にてご対応いたします。
                 </div>
             </div>
@@ -493,7 +636,7 @@
 【その他、ご相談したいこと】：</textarea>
             </div>
 
-            <p style="text-align: center; font-size: 0.9em; font-weight: bold; color: #ff69b4; margin-top: 20px;">
+            <p style="text-align: center; font-size: 0.9em; font-weight: bold; color: var(--primary-color); margin-top: 24px;">
                 ▼入力が終わりましたら「送信する」をクリック（タップ）してください。▼
             </p>
 
@@ -807,3 +950,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
+
